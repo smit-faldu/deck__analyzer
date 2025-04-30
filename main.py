@@ -1,11 +1,27 @@
 import os
 from fastapi import FastAPI, UploadFile, File, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 import uvicorn
 from ocr import convert_pdf_to_images, extract_text_from_images, extract_text_from_pptx
 from agent import analyze_presentation_content
 
 app = FastAPI(title="Pitch Deck Analyzer API")
+
+origins = [
+    "http://localhost:3000",
+    "http://localhost:5173",
+    "https://app.govertx.com"
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 
 @app.post("/analyze/", response_class=JSONResponse)
 async def analyze_pitch_deck(file: UploadFile = File(...)):
