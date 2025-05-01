@@ -11,6 +11,21 @@ from datetime import datetime
 
 # Set the Tesseract path for Windows
 pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
+# Configure Tesseract path
+# In Docker, Tesseract is installed at /usr/bin/tesseract
+# In Windows local development, it's at C:\Program Files\Tesseract-OCR\tesseract.exe
+# if os.path.exists('/usr/bin/tesseract'):  # Docker environment
+#     pytesseract.pytesseract.tesseract_cmd = '/usr/bin/tesseract'
+#     print("Using Docker Tesseract installation")
+# elif os.name == 'nt':  # Windows local development
+#     default_tesseract_path = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
+#     if os.path.exists(default_tesseract_path):
+#         pytesseract.pytesseract.tesseract_cmd = default_tesseract_path
+#         print(f"Using Windows Tesseract installation at: {default_tesseract_path}")
+#     else:
+#         print("Warning: Tesseract not found. Make sure it's installed.")
+# else:  # Linux/Mac local development
+#     print("Using system Tesseract installation")
 
 def save_debug_image(img, prefix="debug"):
     """Save image to temporary directory for debugging"""
