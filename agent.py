@@ -3,14 +3,18 @@ import json
 import re
 from fastapi import HTTPException
 from typing import Dict, Any
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 # Configure Gemini API
-GEMINI_API_KEY = "AIzaSyDAH3gZbmTJQJ_rN2EK1qHpBTUB-WdjTE8"
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 genai.configure(api_key=GEMINI_API_KEY)
 
 class PitchDeckAnalyzer:
     def __init__(self):
-        self.model = genai.GenerativeModel(model_name="models/gemini-1.5-pro")
+        self.model = genai.GenerativeModel(model_name="models/gemini-1.5-flash")
     
     @staticmethod
     def clean_json_response(response_text: str) -> str:
