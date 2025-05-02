@@ -3,10 +3,7 @@ import json
 import re
 from fastapi import HTTPException
 from typing import Dict, Any
-from dotenv import load_dotenv
 import os
-
-load_dotenv()
 
 # Configure Gemini API
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
